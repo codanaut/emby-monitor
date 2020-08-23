@@ -21,7 +21,7 @@ Install the requirements\
 
 Open [settings.ini](settings.ini) and enter your server ip or url and api key like so\
 [Connection]\
-url = http://0.0.0.0:8096\
+url = http://0.0.0.0:8096 \
 apiKey = yourReallyLongrandomKey
 
 Run the program\
