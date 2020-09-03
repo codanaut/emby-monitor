@@ -30,7 +30,7 @@ Run the program\
 
 
 ### Planned Future Features
-- library tab
+- library tab (Coming Really Soon)
 - user statistics
 - replace settings.ini with gui settings tab
 - light/dark mode
