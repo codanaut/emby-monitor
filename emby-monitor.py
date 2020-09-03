@@ -294,13 +294,14 @@ def on_load(self):
             hasPasswordSet = user['HasConfiguredPassword']
 
             # Last Activity Date
-            lastActivity = user['LastActivityDate']
-            #print(lastLogin)
-            lastActivityDate = lastActivity[:-14]
-            #print(lastLoginDate)
-            formatLastActivityDate = datetime.datetime.strptime(lastActivityDate,"%Y-%m-%dT%H:%M:%S")
-            newFormat = "%m-%d-%Y"
-            useLastActivityDate = formatLastActivityDate.strftime(newFormat)
+            lastActivity = user.get('LastActivityDate')
+            try:
+                lastActivityDate = lastActivity[:-14]
+                formatLastActivityDate = datetime.datetime.strptime(lastActivityDate,"%Y-%m-%dT%H:%M:%S")
+                newFormat = "%m-%d-%Y"
+                useLastActivityDate = formatLastActivityDate.strftime(newFormat)
+            except:
+                useLastActivityDate = "No Activity Yet"
             
 
             
@@ -494,9 +495,10 @@ def on_load(self):
         self.label_ProgramDataPath.setText(f"Program Path: {sysInfo['ProgramDataPath']}")
         self.label_LogPath.setText(f"Log Path: {sysInfo['LogPath']}")
         self.label_CachePath.setText(f"Cache Path: {sysInfo['CachePath']}")
-    except:
+    except KeyError as ex:
         self.label_server_name.setText(f'Unable To Connect')
         self.label_version.setText(f'Please Check Settings')
+        print(ex)
     
 
     
@@ -519,6 +521,7 @@ def allUsers():
         users = usersresponse.json()
         return users
     except:
+        print("it broke in allUsers")
         pass
 
 def deviceCount():
@@ -528,6 +531,7 @@ def deviceCount():
         devicecount = len(activeCount)
         return devicecount
     except:
+        print("it broke in deviceCount")
         pass
 
 def allDevices():
@@ -536,6 +540,7 @@ def allDevices():
         devices = deviceresponse.json()
         return devices
     except:
+        print("it broke in allDevice")
         pass
 
 
@@ -545,7 +550,9 @@ def systemInfo():
         systemInfo = getSystemInfo.json()
         return systemInfo
     except:
+        print("it broke in systemInfo")
         pass
+        
 
 
 

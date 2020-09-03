@@ -18,3 +18,6 @@ All notable changes to this project will be documented in this file, if i rememb
 ## 2020-9-3
 ### Changed
 - changed tv poster to thumbnail when only one stream is playing
+
+### Fixed
+- fixed issue with users that have no activity yet causing keyerror to stop loading rest of sections
