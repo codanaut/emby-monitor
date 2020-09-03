@@ -10,14 +10,12 @@ I find it handy having a way to check playback statuses or basic info quickly wi
  
 [full album here](https://imgur.com/a/UZ4haSq)
 
-This project is still very much a beta and has very little testing outside of one environment. 
-
 ## Usage
-Edit the url and key with your info. You can get an emby api key by going to your *Dashboard>API Keys* and then you can generate a key. 
-
 
 Install the requirements\
 `pip3 install –upgrade -r requirements.txt`
+
+Edit the url and key with your info. You can get an emby api key by going to your *Dashboard>API Keys* and then you can generate a key. 
 
 Open [settings.example](settings.example) and enter your server ip or url and api key like so\
 [Connection]\
@@ -31,10 +29,11 @@ Run the program\
 
 
 
-Planned Future Features
+### Planned Future Features
 - library tab
 - user statistics
 - replace settings.ini with gui settings tab
+- light/dark mode
 
 ##### Disclaimer
 ###### I have no relation to Emby, i just use it and wanted my own monitor. 

@@ -232,7 +232,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         parrentID = user['NowPlayingItem']['ParentLogoItemId']
                         #logoURL = f'{url}/emby/items/{parrentID}/Images/Banner?api_key={key}'
                         if streamCount == 1:
-                            logoURL = f'{url}/emby/items/{parrentID}/Images/Primary?api_key={key}'
+                            logoURL = f'{url}/emby/items/{parrentID}/Images/Thumb?api_key={key}'
                         else:
                             logoURL = f'{url}/emby/items/{parrentID}/Images/Banner?api_key={key}'
                         self.webEngineView = QtWebEngineWidgets.QWebEngineView(self.groupBox_nowplaying)
