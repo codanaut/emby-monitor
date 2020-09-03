@@ -142,7 +142,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         # Set Label for Play Method
                         self.label_Play_Method = QtWidgets.QLabel(self.groupBox_nowplaying)
                         self.label_Play_Method.setObjectName("label_Play_Method")
-                        self.gridLayout_NowPlaying.addWidget(self.label_Play_Method, 5, 0, 1, 1)
+                        self.gridLayout_NowPlaying.addWidget(self.label_Play_Method, 3, 0, 1, 1)
                         self.label_Play_Method.setText(f'Stream Method: {streamMethod}')
 
                         #self.label_Test = QtWidgets.QLabel(self.groupBox_nowplaying)
@@ -171,7 +171,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         self.webEngineView.setGeometry(QtCore.QRect(50, 50, 50, 50))
                         self.webEngineView.setUrl(QtCore.QUrl(logoURL))
                         self.webEngineView.setObjectName("webEngineView")
-                        self.gridLayout_NowPlaying.addWidget(self.webEngineView, 0, 1, 3, 2)
+                        self.gridLayout_NowPlaying.addWidget(self.webEngineView, 0, 2, 4, 2)
 
                         # add group to layout
                         self.verticalLayout.addWidget(self.groupBox_nowplaying)
