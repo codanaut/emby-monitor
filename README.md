@@ -19,10 +19,12 @@ Edit the url and key with your info. You can get an emby api key by going to you
 Install the requirements\
 `pip3 install –upgrade -r requirements.txt`
 
-Open [settings.ini](settings.ini) and enter your server ip or url and api key like so\
+Open [settings.example](settings.example) and enter your server ip or url and api key like so\
 [Connection]\
 url = http://0.0.0.0:8096 \
 apiKey = yourReallyLongrandomKey
+
+SaveAs: settings.ini
 
 Run the program\
 `python3 emby-monitor.py`
