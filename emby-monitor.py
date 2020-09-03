@@ -27,10 +27,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
-        #old stuff examples
-        #self.pushButton.clicked.connect(self.on_click)
-        #self.label_server_name.setText("This is a test")
-
         # On first load
         on_load(self)
         QTimer.singleShot(1,self.nowPlaying)
@@ -45,12 +41,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
 
     @pyqtSlot()
-    def on_click(self):
-        textboxValue = self.lineEdit.text()
-        response = requests.request("GET", textboxValue)
-        data = response.json()
-        self.textBrowser.setText(str(data))
-
     def updateStats(self):
         on_load(self)
     
@@ -183,8 +173,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         seasonNumber = str(user['NowPlayingItem']['ParentIndexNumber'])
                         episodeNumber = str(user['NowPlayingItem']['IndexNumber'])
                         streamMethod = user['PlayState']['PlayMethod']
-                        
-                        #print(logoURL)
 
                         # Create nowplaying group
                         self.groupBox_nowplaying = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -230,9 +218,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
                         # Set TV Banner
                         parrentID = user['NowPlayingItem']['ParentLogoItemId']
-                        #logoURL = f'{url}/emby/items/{parrentID}/Images/Banner?api_key={key}'
                         if streamCount == 1:
-                            logoURL = f'{url}/emby/items/{parrentID}/Images/Primary?api_key={key}'
+                            logoURL = f'{url}/emby/items/{parrentID}/Images/Thumb?api_key={key}'
                         else:
                             logoURL = f'{url}/emby/items/{parrentID}/Images/Banner?api_key={key}'
                         self.webEngineView = QtWebEngineWidgets.QWebEngineView(self.groupBox_nowplaying)
@@ -243,8 +230,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
                         self.verticalLayout.addWidget(self.groupBox_nowplaying)
                         
-                        
-
                 # if error or not tv show or movie then pass and keep going
                 except KeyError:
                     pass
@@ -289,21 +274,19 @@ def on_load(self):
         self.verticalLayout_UserTab.addWidget(self.scrollArea_Users)
 
         for user in users:
-            #print(user)
             userName = user['Name']
             hasPasswordSet = user['HasConfiguredPassword']
 
             # Last Activity Date
-            lastActivity = user['LastActivityDate']
-            #print(lastLogin)
-            lastActivityDate = lastActivity[:-14]
-            #print(lastLoginDate)
-            formatLastActivityDate = datetime.datetime.strptime(lastActivityDate,"%Y-%m-%dT%H:%M:%S")
-            newFormat = "%m-%d-%Y"
-            useLastActivityDate = formatLastActivityDate.strftime(newFormat)
-            
-
-            
+            lastActivity = user.get('LastActivityDate')
+            try:
+                lastActivityDate = lastActivity[:-14]
+                formatLastActivityDate = datetime.datetime.strptime(lastActivityDate,"%Y-%m-%dT%H:%M:%S")
+                newFormat = "%m-%d-%Y"
+                useLastActivityDate = formatLastActivityDate.strftime(newFormat)
+            except:
+                useLastActivityDate = "No Activity Yet"
+                
 
             # Create Users groupbox
             self.groupBox_UsersTab = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_users)
@@ -494,9 +477,10 @@ def on_load(self):
         self.label_ProgramDataPath.setText(f"Program Path: {sysInfo['ProgramDataPath']}")
         self.label_LogPath.setText(f"Log Path: {sysInfo['LogPath']}")
         self.label_CachePath.setText(f"Cache Path: {sysInfo['CachePath']}")
-    except:
+    except KeyError as ex:
         self.label_server_name.setText(f'Unable To Connect')
         self.label_version.setText(f'Please Check Settings')
+        print(ex)
     
 
     
@@ -519,6 +503,7 @@ def allUsers():
         users = usersresponse.json()
         return users
     except:
+        print("it broke in allUsers")
         pass
 
 def deviceCount():
@@ -528,6 +513,7 @@ def deviceCount():
         devicecount = len(activeCount)
         return devicecount
     except:
+        print("it broke in deviceCount")
         pass
 
 def allDevices():
@@ -536,6 +522,7 @@ def allDevices():
         devices = deviceresponse.json()
         return devices
     except:
+        print("it broke in allDevice")
         pass
 
 
@@ -545,7 +532,9 @@ def systemInfo():
         systemInfo = getSystemInfo.json()
         return systemInfo
     except:
+        print("it broke in systemInfo")
         pass
+        
 
 
 
