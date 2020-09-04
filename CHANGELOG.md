@@ -22,3 +22,4 @@ All notable changes to this project will be documented in this file, if i rememb
 
 ### Fixed
 - fixed issue with users that have no activity yet causing keyerror to stop loading rest of sections
+- added exception for weird, random glitch where device doesnt report back last active time/date

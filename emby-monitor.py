@@ -411,15 +411,18 @@ def on_load(self):
 
         for device in deviceList:
             
-            deviceName = device['Name']
-            lastUser = device['LastUserName']
-            appName = device['AppName']
+            deviceName = device.get('Name')
+            lastUser = device.get('LastUserName')
+            appName = device.get('AppName')
 
-            lastUsed = device['DateLastActivity']
-            strippedLastUsed = lastUsed.strip('.0000000Z')
-            fixDeviceDate = datetime.datetime.strptime(strippedLastUsed,"%Y-%m-%dT%H:%M:%S")
-            newFormat = "%m-%d-%Y"
-            lastUsedDate = fixDeviceDate.strftime(newFormat)
+            lastUsed = device.get('DateLastActivity')
+            try:
+                strippedLastUsed = lastUsed.strip('.0000000Z')
+                fixDeviceDate = datetime.datetime.strptime(strippedLastUsed,"%Y-%m-%dT%H:%M:%S")
+                newFormat = "%m-%d-%Y"
+                lastUsedDate = fixDeviceDate.strftime(newFormat)
+            except:
+                lastUsedDate = "unknown"
 
 
 
